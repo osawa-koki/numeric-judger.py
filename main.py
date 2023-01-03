@@ -15,4 +15,5 @@ def receive_image(image: bytes = File(...)):
     return {"received": True}
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=80)
