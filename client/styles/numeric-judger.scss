@@ -1,0 +1,19 @@
+
+#NumericJudger {
+  margin: 3rem auto;
+  max-width: 1000px;
+  display: flex;
+  padding: 1rem;
+  #CnavasDiv {
+    #Canvas {
+      border: 1px lightgray solid;
+      aspect-ratio: 1/1;
+    }
+    #ButtonContainer {
+      display: flex;
+      margin: 0.3rem 0;
+      justify-content: center;
+    }
+  }
+}
+

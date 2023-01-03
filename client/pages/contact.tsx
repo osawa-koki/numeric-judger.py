@@ -22,7 +22,7 @@ export default function HelloWorld() {
           <p>仮想DOMによってJSで管理しているデータを中心にHTMLを生成することができます。<br /><br />`AddEventListener`や`JQuery("***").on`なんて使いません。<br /><br />ちなみに、Next.js(React)は単方向バインディングであるため、HTMLをそのまま操作することはせずに、JSによるデータを操作することで描写するHTMLを制御します。<br /><br />この点がVue.jsやAngularと異なります。<br /><br />また、"react-bootstrap"によるBootstrapのサポートがあるため、簡単にBootstrapを導入できます。</p>
           <hr />
           <Alert variant="info">You cliecked { count } times 🤣🤣🤣</Alert>
-          <Button variant="primary" onClick={() => {setCount(count + 1)}}>Click Me {count % 3 === 0 && count !== 0 ? '🤪' : '😀'}</Button>
+          <Button variant="primary" onClick={() => {setCount(count + 1)}}>Click Me {((count % 3 === 0 && count !== 0) || /3/.test(count.toString()) ? '🤪' : '😀')}</Button>
           <hr />
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
