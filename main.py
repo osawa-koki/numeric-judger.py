@@ -36,6 +36,10 @@ def receive_image(image: bytes = File(...)):
     # 予測結果を返す
     return result
 
+# Serve static files from the "www" directory and set index.html as the default file
+app.mount("/api", app)
+app.mount("/", StaticFiles(directory="www", html=True), name="www")
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=80)
