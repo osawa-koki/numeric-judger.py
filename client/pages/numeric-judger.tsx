@@ -11,6 +11,18 @@ ChartJS.register(
   ...registerables,
 );
 
+const options = {
+  scales: {
+    y: {
+      ticks: {
+        callback: function(value: number, _: any) {
+          return `${value} %`;
+        },
+      },
+    },
+  },
+};
+
 function MyDrawing() {
 
   let [canvas, setCanvas] = useState<any>(null);
@@ -91,6 +103,7 @@ function MyDrawing() {
               }
             ],
           }}
+          options={options}
         />
       </div>
     </div>
