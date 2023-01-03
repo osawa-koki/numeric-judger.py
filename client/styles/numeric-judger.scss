@@ -1,0 +1,31 @@
+
+#NumericJudger {
+  margin: 3rem auto;
+  max-width: 1000px;
+  display: flex;
+  padding: 1rem;
+  #CnavasDiv {
+    #Canvas {
+      border: 1px lightgray solid;
+      aspect-ratio: 1/1;
+    }
+    #ButtonContainer {
+      display: flex;
+      justify-content: center;
+      margin: 0.3rem 0;
+      button {
+        margin: 0 0.2rem;
+      }
+    }
+  }
+  #ChartDiv {
+    margin-left: 1rem;
+    width: 100%;
+    #Chart {
+      border: 1px lightgray solid;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
