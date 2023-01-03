@@ -17,7 +17,7 @@ COPY client .
 RUN yarn build
 
 # Step 2: Start the FastAPI server
-FROM python:3.6-alpine as production-stage
+FROM python:3.10.7-alpine as production-stage
 EXPOSE 80
 
 # Install build tools
