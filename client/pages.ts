@@ -12,6 +12,10 @@ const pages = [
     path: "/contact",
     name: "Contact",
   },
+  {
+    path: "/numeric-judger",
+    name: "numeric-judger",
+  },
 ];
 
 export default pages;
