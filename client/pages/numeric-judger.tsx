@@ -10,7 +10,7 @@ function MyDrawing() {
     canvas.remove.apply(canvas, canvas.getObjects())
   }
 
-  const SendBinary = (e) => {
+  const Judge = () => {
     // 画像をバイナリに変換
     // create a new canvas element to store the data
     const dataCanvas = document.createElement('canvas');
@@ -34,7 +34,7 @@ function MyDrawing() {
     var formData = new FormData();
     formData.append('image', blob);
     // FormDataをPOST
-    fetch('/api/numeric-judger', {
+    fetch('http://localhost/api/numeric-judge', {
       method: 'POST',
       body: formData
     })
@@ -50,7 +50,6 @@ function MyDrawing() {
     canvas.freeDrawingBrush.width=5;
     canvas.freeDrawingBrush.color="black";
     canvas.isDrawingMode = true;
-    canvas.on('path:created', SendBinary);
   }, [canvas]);
 
   useEffect(() => {
@@ -64,6 +63,7 @@ function MyDrawing() {
         <div id='Canvas'><canvas id="myCanvas" width={300} height={300} /></div>
         <div id='ButtonContainer'>
           <Button variant="outline-secondary" onClick={ClearCanvas}>Delete</Button>
+          <Button variant="outline-primary" onClick={Judge}>🦁 Judge 🦁</Button>
         </div>
       </div>
     </div>
