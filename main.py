@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 import uuid
 
+from predict import predict
+
 app = FastAPI()
 
 # CORSを許可する
@@ -21,10 +23,18 @@ def receive_image(image: bytes = File(...)):
     # GUIDを小文字に変換する
     guid = guid.hex.lower()
 
+    # ファイル名
+    filename = f"./tmp/{guid}.png"
+
     # 画像を保存する
-    with open(f"{guid}.png", "wb") as f:
+    with open(filename, "wb") as f:
         f.write(image)
-    return {"received": True}
+
+    # 画像を予測する
+    result = predict(filename)
+
+    # 予測結果を返す
+    return result
 
 if __name__ == "__main__":
     import uvicorn
