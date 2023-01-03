@@ -20,6 +20,9 @@ RUN yarn build
 FROM python:3.11.0-alpine as production-stage
 EXPOSE 80
 
+# Install build tools
+RUN apk add --no-cache build-base
+
 # Set the working directory
 WORKDIR /app
 
