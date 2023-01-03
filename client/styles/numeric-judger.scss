@@ -18,5 +18,14 @@
       }
     }
   }
+  #ChartDiv {
+    margin-left: 1rem;
+    width: 100%;
+    #Chart {
+      border: 1px lightgray solid;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 

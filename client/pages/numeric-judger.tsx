@@ -1,10 +1,20 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { fabric } from "fabric";
 import Button from 'react-bootstrap/Button';
+import {
+  Chart as ChartJS,
+  registerables,
+} from 'chart.js'
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+  ...registerables,
+);
 
 function MyDrawing() {
 
   let [canvas, setCanvas] = useState<any>(null);
+  const [predicted, setPredicted] = useState<number[]>([]);
 
   const ClearCanvas = () => {
     canvas.remove.apply(canvas, canvas.getObjects())
@@ -40,7 +50,11 @@ function MyDrawing() {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      let predicted: number[] = [];
+      for (let i = 0; i < 10; i++) {
+        predicted.push(data[i]);
+      }
+      setPredicted(predicted);
     });
   };
 
@@ -66,8 +80,21 @@ function MyDrawing() {
           <Button variant="outline-primary" onClick={Judge}>🦁 Judge 🦁</Button>
         </div>
       </div>
+      <div id='ChartDiv'>
+        <Bar
+          data={{
+            labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            datasets: [
+              {
+                label: 'Probability',
+                data: predicted,
+              }
+            ],
+          }}
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default MyDrawing;
