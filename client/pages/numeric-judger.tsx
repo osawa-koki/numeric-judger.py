@@ -56,7 +56,7 @@ function MyDrawing() {
     var formData = new FormData();
     formData.append('image', blob);
     // FormDataをPOST
-    fetch('http://localhost/api/numeric-judge', {
+    fetch('/api/numeric-judge', {
       method: 'POST',
       body: formData
     })
