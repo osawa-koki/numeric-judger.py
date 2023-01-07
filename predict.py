@@ -3,7 +3,7 @@ from tensorflow import keras
 import matplotlib.pyplot as plt
 
 # モデルをロード
-model = keras.models.load_model('./models/model2.h5')
+model = keras.models.load_model('./models/model4.h5')
 
 def predict(filename):
     # 予測を行う画像を読み込みます
