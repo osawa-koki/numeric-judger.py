@@ -33,6 +33,7 @@ function MyDrawing() {
   }
 
   const Judge = () => {
+    setPredicted([]);
     // 画像をバイナリに変換
     // create a new canvas element to store the data
     const dataCanvas = document.createElement('canvas');
