@@ -17,11 +17,8 @@ COPY client .
 RUN yarn build
 
 # Step 2: Start the FastAPI server
-FROM python:3.10.7-alpine as production-stage
+FROM tensorflow/tensorflow as production-stage
 EXPOSE 80
-
-# Install build tools
-RUN apk add --no-cache build-base
 
 # Set the working directory
 WORKDIR /app
