@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import cv2
 
 # モデルをロード
-model = keras.models.load_model('./models/model5.h5')
+model = keras.models.load_model('./model5.h5')
 
 def predict(filename):
     image = cv2.imread(filename)

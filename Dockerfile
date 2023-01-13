@@ -17,8 +17,11 @@ COPY client .
 RUN yarn build
 
 # Step 2: Start the FastAPI server
-FROM tensorflow/tensorflow as production-stage
+FROM python:3.8 as production-stage
 EXPOSE 80
+
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y libgl1-mesa-dev
 
 # Set the working directory
 WORKDIR /app

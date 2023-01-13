@@ -3,3 +3,4 @@ uvicorn
 matplotlib
 python-multipart
 opencv-python
+tensorflow
