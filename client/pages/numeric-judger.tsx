@@ -54,7 +54,6 @@ function MyDrawing() {
     }
     // Blobを作成
     const blob = new Blob([buffer.buffer]);
-    // form-data
 
     // Create a new FileReader
     const reader = new FileReader();
