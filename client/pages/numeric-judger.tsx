@@ -60,7 +60,7 @@ function MyDrawing() {
 
     // Add an event listener for when the file is loaded
     reader.addEventListener("load", function () {
-      const imageBytes = new Uint8Array(reader.result);
+      const imageBytes = new Uint8Array(reader.result as ArrayBuffer);
       // Create FormData object
       const formData = new FormData();
       formData.append('image', new File([imageBytes], "image.png", { type: "image/png" }));
