@@ -35,53 +35,63 @@ function MyDrawing() {
   }
 
   const Judge = () => {
-    setPredicted([]);
-    // 画像をバイナリに変換
-    // create a new canvas element to store the data
-    const dataCanvas = document.createElement('canvas');
-    dataCanvas.width = canvas.getWidth();
-    dataCanvas.height = canvas.getHeight();
+    try {
+      setPredicted([]);
+      setLoading(true);
+      // 画像をバイナリに変換
+      // create a new canvas element to store the data
+      const dataCanvas = document.createElement('canvas');
+      dataCanvas.width = canvas.getWidth();
+      dataCanvas.height = canvas.getHeight();
 
-    // copy the data from the original canvas to the new canvas
-    const ctx = dataCanvas.getContext('2d');
-    ctx.drawImage(canvas.getElement(), 0, 0);
+      // copy the data from the original canvas to the new canvas
+      const ctx = dataCanvas.getContext('2d');
+      ctx.drawImage(canvas.getElement(), 0, 0);
 
-    // get the data from the new canvas as a binary data
-    const data = dataCanvas.toDataURL('image/png');
-    const binaryData = atob(data.split(',')[1]);
-    const buffer = new Uint8Array(binaryData.length);
-    for (var i = 0; i < binaryData.length; i++) {
-      buffer[i] = binaryData.charCodeAt(i);
+      // get the data from the new canvas as a binary data
+      const data = dataCanvas.toDataURL('image/png');
+      const binaryData = atob(data.split(',')[1]);
+      const buffer = new Uint8Array(binaryData.length);
+      for (var i = 0; i < binaryData.length; i++) {
+        buffer[i] = binaryData.charCodeAt(i);
+      }
+      // Blobを作成
+      const blob = new Blob([buffer.buffer]);
+
+      // Create a new FileReader
+      const reader = new FileReader();
+
+      // Add an event listener for when the file is loaded
+      reader.addEventListener("load", function () {
+        const imageBytes = new Uint8Array(reader.result as ArrayBuffer);
+        // Create FormData object
+        const formData = new FormData();
+        formData.append('image', new File([imageBytes], "image.png", { type: "image/png" }));
+        // Perform the fetch request
+        fetch('/api/numeric-judge', {
+          method: 'POST',
+          body: formData,
+        })
+        .then(res => res.json())
+        .then(data => {
+          let predicted: number[] = [];
+          for (let i = 0; i < 10; i++) {
+            predicted.push(data[i]);
+          }
+          setPredicted(predicted);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setLoading(false);
+        });
+      }, false);
+
+      // Read the file as an ArrayBuffer
+      reader.readAsArrayBuffer(blob);
+    } catch (ex) {
+      console.error(ex);
     }
-    // Blobを作成
-    const blob = new Blob([buffer.buffer]);
-
-    // Create a new FileReader
-    const reader = new FileReader();
-
-    // Add an event listener for when the file is loaded
-    reader.addEventListener("load", function () {
-      const imageBytes = new Uint8Array(reader.result as ArrayBuffer);
-      // Create FormData object
-      const formData = new FormData();
-      formData.append('image', new File([imageBytes], "image.png", { type: "image/png" }));
-      // Perform the fetch request
-      fetch('/api/numeric-judge', {
-        method: 'POST',
-        body: formData,
-      })
-      .then(res => res.json())
-      .then(data => {
-        let predicted: number[] = [];
-        for (let i = 0; i < 10; i++) {
-          predicted.push(data[i]);
-        }
-        setPredicted(predicted);
-      });
-    }, false);
-
-    // Read the file as an ArrayBuffer
-    reader.readAsArrayBuffer(blob);
   };
 
   useEffect(() => {
