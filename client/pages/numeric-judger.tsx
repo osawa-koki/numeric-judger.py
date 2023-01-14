@@ -89,6 +89,7 @@ function MyDrawing() {
     canvas.freeDrawingBrush.width=7;
     canvas.freeDrawingBrush.color="black";
     canvas.isDrawingMode = true;
+    ClearCanvas();
   }, [canvas]);
 
   useEffect(() => {
