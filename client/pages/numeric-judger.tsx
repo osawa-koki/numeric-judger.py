@@ -78,6 +78,11 @@ function MyDrawing() {
             predicted.push(data[i]);
           }
           setPredicted(predicted);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setLoading(false);
         });
       }, false);
 
