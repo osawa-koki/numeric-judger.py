@@ -25,7 +25,7 @@ const options = {
 
 function MyDrawing() {
 
-  let [canvas, setCanvas] = useState<any>(null);
+  const [canvas, setCanvas] = useState<any>(null);
   const [predicted, setPredicted] = useState<number[]>([]);
 
   const ClearCanvas = () => {
