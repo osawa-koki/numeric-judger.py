@@ -65,7 +65,7 @@ function MyDrawing() {
       const formData = new FormData();
       formData.append('image', new File([imageBytes], "image.png", { type: "image/png" }));
       // Perform the fetch request
-      fetch('http://localhost/api/numeric-judge', {
+      fetch('/api/numeric-judge', {
         method: 'POST',
         body: formData,
       })
