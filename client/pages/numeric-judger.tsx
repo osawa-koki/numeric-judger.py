@@ -26,6 +26,7 @@ const options = {
 function MyDrawing() {
 
   const [canvas, setCanvas] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const [predicted, setPredicted] = useState<number[]>([]);
 
   const ClearCanvas = () => {
@@ -102,8 +103,10 @@ function MyDrawing() {
       <div id='CnavasDiv'>
         <div id='Canvas'><canvas id="myCanvas" width={300} height={300} /></div>
         <div id='ButtonContainer'>
-          <Button variant="outline-secondary" onClick={ClearCanvas}>Delete</Button>
-          <Button variant="outline-primary" onClick={Judge}>🦁 Judge 🦁</Button>
+          <Button variant="outline-secondary" onClick={ClearCanvas} disabled={loading}>Delete</Button>
+          <Button variant="outline-primary" onClick={Judge} disabled={loading}>
+            {loading ? 'Loading………' : '🦁 Judge 🦁'}
+          </Button>
         </div>
       </div>
       <div id='ChartDiv'>
