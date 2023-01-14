@@ -1,5 +1,5 @@
 # Step 1: Build the Next.js app
-FROM node:18.11.0-alpine as build-stage
+FROM node:16 as build-stage
 
 # Set the working directory
 WORKDIR /app
