@@ -29,7 +29,7 @@ function MyDrawing() {
   const [predicted, setPredicted] = useState<number[]>([]);
 
   const ClearCanvas = () => {
-    canvas.remove.apply(canvas, canvas.getObjects())
+    canvas.remove.apply(canvas, canvas.getObjects());
   }
 
   const Judge = () => {
