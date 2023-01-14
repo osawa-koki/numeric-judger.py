@@ -56,6 +56,9 @@ function MyDrawing() {
     // FormDataをPOST
     fetch('/api/numeric-judge', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'image/png',
+      },
       body: blob,
     })
     .then(res => res.json())
