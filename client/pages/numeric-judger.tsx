@@ -97,7 +97,7 @@ function MyDrawing() {
   useEffect(() => {
     if (canvas === null) return;
     canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-    canvas.freeDrawingBrush.width=7;
+    canvas.freeDrawingBrush.width=10;
     canvas.freeDrawingBrush.color="black";
     canvas.isDrawingMode = true;
     ClearCanvas();
