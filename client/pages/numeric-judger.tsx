@@ -34,10 +34,11 @@ function MyDrawing() {
     canvas.backgroundColor = 'white';
   }
 
-  const Judge = () => {
+  const Judge = async () => {
     try {
       setPredicted([]);
       setLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 10)); // ちょっと待つ
       // 画像をバイナリに変換
       // create a new canvas element to store the data
       const dataCanvas = document.createElement('canvas');
