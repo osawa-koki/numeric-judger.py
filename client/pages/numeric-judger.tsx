@@ -30,6 +30,7 @@ function MyDrawing() {
 
   const ClearCanvas = () => {
     canvas.remove.apply(canvas, canvas.getObjects());
+    canvas.backgroundColor = 'white';
   }
 
   const Judge = () => {
