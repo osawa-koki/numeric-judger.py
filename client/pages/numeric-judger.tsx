@@ -53,13 +53,10 @@ function MyDrawing() {
     }
     // Blobを作成
     var blob = new Blob([buffer.buffer]);
-    // BlobをFormDataに追加
-    var formData = new FormData();
-    formData.append('image', blob);
     // FormDataをPOST
     fetch('/api/numeric-judge', {
       method: 'POST',
-      body: formData
+      body: blob,
     })
     .then(res => res.json())
     .then(data => {
