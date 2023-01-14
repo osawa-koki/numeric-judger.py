@@ -53,22 +53,34 @@ function MyDrawing() {
     }
     // Blobを作成
     const blob = new Blob([buffer.buffer]);
-    // maltipart/form-dataでPOST
-    fetch('/api/numeric-judge', {
-      method: 'POST',
-      headers: {
-        'Content-Type': "maltipart/form-data",
-      },
-      body: blob,
-    })
-    .then(res => res.json())
-    .then(data => {
-      let predicted: number[] = [];
-      for (let i = 0; i < 10; i++) {
-        predicted.push(data[i]);
-      }
-      setPredicted(predicted);
-    });
+    // form-data
+
+    // Create a new FileReader
+    const reader = new FileReader();
+
+    // Add an event listener for when the file is loaded
+    reader.addEventListener("load", function () {
+      const imageBytes = new Uint8Array(reader.result);
+      // Create FormData object
+      const formData = new FormData();
+      formData.append('image', new File([imageBytes], "image.png", { type: "image/png" }));
+      // Perform the fetch request
+      fetch('http://localhost/api/numeric-judge', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(res => res.json())
+      .then(data => {
+        let predicted: number[] = [];
+        for (let i = 0; i < 10; i++) {
+          predicted.push(data[i]);
+        }
+        setPredicted(predicted);
+      });
+    }, false);
+
+    // Read the file as an ArrayBuffer
+    reader.readAsArrayBuffer(blob);
   };
 
   useEffect(() => {
