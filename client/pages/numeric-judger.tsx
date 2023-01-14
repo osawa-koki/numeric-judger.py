@@ -25,7 +25,8 @@ const options = {
 
 function MyDrawing() {
 
-  let [canvas, setCanvas] = useState<any>(null);
+  const [canvas, setCanvas] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const [predicted, setPredicted] = useState<number[]>([]);
 
   const ClearCanvas = () => {
@@ -86,9 +87,10 @@ function MyDrawing() {
   useEffect(() => {
     if (canvas === null) return;
     canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-    canvas.freeDrawingBrush.width=5;
+    canvas.freeDrawingBrush.width=7;
     canvas.freeDrawingBrush.color="black";
     canvas.isDrawingMode = true;
+    ClearCanvas();
   }, [canvas]);
 
   useEffect(() => {
@@ -101,8 +103,10 @@ function MyDrawing() {
       <div id='CnavasDiv'>
         <div id='Canvas'><canvas id="myCanvas" width={300} height={300} /></div>
         <div id='ButtonContainer'>
-          <Button variant="outline-secondary" onClick={ClearCanvas}>Delete</Button>
-          <Button variant="outline-primary" onClick={Judge}>🦁 Judge 🦁</Button>
+          <Button variant="outline-secondary" onClick={ClearCanvas} disabled={loading}>Delete</Button>
+          <Button variant="outline-primary" onClick={Judge} disabled={loading}>
+            {loading ? 'Loading………' : '🦁 Judge 🦁'}
+          </Button>
         </div>
       </div>
       <div id='ChartDiv'>
