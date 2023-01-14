@@ -47,17 +47,17 @@ function MyDrawing() {
     // get the data from the new canvas as a binary data
     const data = dataCanvas.toDataURL('image/png');
     const binaryData = atob(data.split(',')[1]);
-    var buffer = new Uint8Array(binaryData.length);
+    const buffer = new Uint8Array(binaryData.length);
     for (var i = 0; i < binaryData.length; i++) {
       buffer[i] = binaryData.charCodeAt(i);
     }
     // Blobを作成
-    var blob = new Blob([buffer.buffer]);
-    // FormDataをPOST
+    const blob = new Blob([buffer.buffer]);
+    // maltipart/form-dataでPOST
     fetch('/api/numeric-judge', {
       method: 'POST',
       headers: {
-        'Content-Type': 'image/png',
+        'Content-Type': "maltipart/form-data",
       },
       body: blob,
     })
